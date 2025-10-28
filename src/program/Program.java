@@ -39,10 +39,15 @@ end - Выход.
                 System.out.print("\n");
             }return 1;
             case"3":{
-                System.out.print("\nМы советуем вам УСН доходы.\n");
                 int taxE = taxEarnings(earnings);
-                System.out.print("Ваш налог состави: " + taxE + TEXT_RUB);
                 int taxEMS = taxEarningsMinusSpendings(earnings, spendings);
+                if(taxE < taxEMS){
+                    System.out.print("\nМы советуем вам УСН доходы.\n");
+                }
+                else if(taxE == taxEMS){
+                    System.out.print("\nМожете выбрать любую систему налогообложения.\n");
+                }
+                System.out.print("Ваш налог состави: " + taxE + TEXT_RUB);
                 System.out.print("Налог на другой системе: " + taxEMS + TEXT_RUB);
                 System.out.print("Экономия: " + economy(taxEMS, taxE) + TEXT_RUB + "\n");
             }return 1;
