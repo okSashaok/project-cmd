@@ -9,11 +9,21 @@ public class Program{
 end - Выход.
 >""";
     private final static String TEXT_RUB = " рублей.\n";
-    private final static byte INCOME = 6;
-    private final static byte DIFFERENCE_INCOME_EXPENSES = 15;
     private final static Scanner scanner = new Scanner(System.in);
     private static int earnings = 0;
     private static int spendings = 0;
+    private static int minusEqualsZero(int number){
+        return number > -1 ? number : 0;
+    }
+    private static int taxEarnings(int earnings){
+        return (int)(6 * earnings / 100);
+    }
+    private static int taxEarningsMinusSpendings(int earnings, int spendings){
+        return minusEqualsZero(15 * (earnings - spendings) / 100);
+    }
+    private static int economy(int taxEarningsMinusSpendings, int taxEarnings){
+        return minusEqualsZero(taxEarningsMinusSpendings - taxEarnings);
+    }
     public static byte menu(){
         System.out.print(TEXT_MENU);
         String input = scanner.nextLine();
@@ -30,12 +40,11 @@ end - Выход.
             }return 1;
             case"3":{
                 System.out.print("\nМы советуем вам УСН доходы.\n");
-                int tax0 = INCOME * earnings / 100;
-                System.out.print("Ваш налог состави: " + tax0 + TEXT_RUB);
-                int tax1 = DIFFERENCE_INCOME_EXPENSES * (earnings - spendings) / 100;
-                System.out.print("Налог на другой системе: " + tax1 + TEXT_RUB);
-                int economy = tax1 - tax0;
-                System.out.print("Экономия: " + (economy > -1 ? economy : 0) + TEXT_RUB + "\n");
+                int taxE = taxEarnings(earnings);
+                System.out.print("Ваш налог состави: " + taxE + TEXT_RUB);
+                int taxEMS = taxEarningsMinusSpendings(earnings, spendings);
+                System.out.print("Налог на другой системе: " + taxEMS + TEXT_RUB);
+                System.out.print("Экономия: " + economy(taxEMS, taxE) + TEXT_RUB + "\n");
             }return 1;
             case"end":{
                 System.out.print("Программа завершена!");
