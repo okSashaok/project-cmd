@@ -47,6 +47,9 @@ end - Выход.
                 else if(taxE == taxEMS){
                     System.out.print("\nМожете выбрать любую систему налогообложения.\n");
                 }
+                else{
+                    System.out.print("\nМы советуем вам УСН доходы минус расходы.\n");
+                }
                 System.out.print("Ваш налог состави: " + taxE + TEXT_RUB);
                 System.out.print("Налог на другой системе: " + taxEMS + TEXT_RUB);
                 System.out.print("Экономия: " + economy(taxEMS, taxE) + TEXT_RUB + "\n");
