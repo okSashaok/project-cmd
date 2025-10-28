@@ -21,9 +21,6 @@ end - Выход.
     private static int taxEarningsMinusSpendings(int earnings, int spendings){
         return minusEqualsZero(15 * (earnings - spendings) / 100);
     }
-    private static int economy(int taxEarningsMinusSpendings, int taxEarnings){
-        return minusEqualsZero(taxEarningsMinusSpendings - taxEarnings);
-    }
     public static byte menu(){
         System.out.print(TEXT_MENU);
         String input = scanner.nextLine();
@@ -41,18 +38,22 @@ end - Выход.
             case"3":{
                 int taxE = taxEarnings(earnings);
                 int taxEMS = taxEarningsMinusSpendings(earnings, spendings);
+                int economy;
                 if(taxE < taxEMS){
                     System.out.print("\nМы советуем вам УСН доходы.\n");
+                    economy = taxEMS - taxE;
                 }
                 else if(taxE == taxEMS){
                     System.out.print("\nМожете выбрать любую систему налогообложения.\n");
+                    economy = 0;
                 }
                 else{
                     System.out.print("\nМы советуем вам УСН доходы минус расходы.\n");
+                    economy = taxE - taxEMS;
                 }
                 System.out.print("Ваш налог состави: " + taxE + TEXT_RUB);
                 System.out.print("Налог на другой системе: " + taxEMS + TEXT_RUB);
-                System.out.print("Экономия: " + economy(taxEMS, taxE) + TEXT_RUB + "\n");
+                System.out.print("Экономия: " + economy + TEXT_RUB + "\n");
             }return 1;
             case"end":{
                 System.out.print("Программа завершена!");
